@@ -18,6 +18,9 @@
 - [ ] Roles — distinguish a regular user from an admin
 - [ ] Restrict product management (add/edit/delete) to admins only
 - [ ] Require login for checkout and viewing orders
+- [ ] Session handling via JWT access + refresh tokens
+- [ ] Refresh tokens stored server-side (hashed) so sessions can be revoked
+- [ ] Logout revokes the current session; support revoking all sessions (e.g. on password change)
 
 ## Shopping Cart
 - [ ] Add a product to the cart

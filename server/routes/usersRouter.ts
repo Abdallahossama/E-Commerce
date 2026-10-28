@@ -1,3 +1,3 @@
-import { router } from "../server.js";
+// create user
 
-router.use('/users')
+// delete user
