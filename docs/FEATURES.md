@@ -1,25 +1,25 @@
 # Features
 
 ## Product Catalog
-- [ ] Browse all products
-- [ ] View a single product's details
-- [ ] Add a new product
-- [ ] Edit an existing product
-- [ ] Delete a product
+- [x] Browse all products
+- [x] View a single product's details
+- [x] Add a new product
+- [x] Edit an existing product
+- [x] Delete a product
 
 ## User Accounts
-- [ ] Register a new account
-- [ ] Log in / log out
+- [x] Register a new account
+- [x] Log in / log out
 - [ ] Stay signed in across visits
 - [ ] View / edit own profile
 
 ## Authentication & Authorization
-- [ ] Authentication — confirm who a user is before allowing protected actions
-- [ ] Roles — distinguish a regular user from an admin
+- [x] Authentication — confirm who a user is before allowing protected actions
+- [x] Roles — distinguish a regular user from an admin
 - [ ] Restrict product management (add/edit/delete) to admins only
 - [ ] Require login for checkout and viewing orders
-- [ ] Session handling via JWT access + refresh tokens
-- [ ] Refresh tokens stored server-side (hashed) so sessions can be revoked
+- [x] Session handling via JWT access tokens with Bearer token support
+- [ ] Refresh tokens (separate endpoint)
 - [ ] Logout revokes the current session; support revoking all sessions (e.g. on password change)
 
 ## Shopping Cart

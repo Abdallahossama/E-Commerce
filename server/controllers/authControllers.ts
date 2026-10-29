@@ -8,23 +8,16 @@ export const logIn = async (req: Request, res: Response) => {
     const { token, user } = await authServices.logIn({ email, password });
     res
       .cookie("token", token, {
-        httpOnly: true, // Secure from XSS
-        secure: process.env.NODE_ENV === "production", // HTTPS in prod
-        sameSite: "strict", // CSRF protection
-        maxAge: 24 * 60 * 60 * 1000, // 24 hours
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        maxAge: 24 * 60 * 60 * 1000,
       })
       .status(200)
       .json({
         success: true,
         message: "Login successful",
-        data: {
-          user: {
-            userId: user.userId.rows[0].id,
-            email: user.email.rows[0].email,
-            name: user.name.rows[0].name,
-            role: user.role.rows[0].role,
-          },
-        },
+        data: { token, user },
       });
   } catch (e) {
     console.error(e);
@@ -36,10 +29,20 @@ export const logIn = async (req: Request, res: Response) => {
 export const signUp = async (req: Request, res: Response) => {
   try {
     const { name, email, password } = req.body as SignUpInput;
-    await authServices.signUp({ name, email, password });
+    const { token, user } = await authServices.signUp({ name, email, password });
     res
+      .cookie("token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        maxAge: 24 * 60 * 60 * 1000,
+      })
       .status(201)
-      .json({ success: true, message: "Account created successfully" });
+      .json({
+        success: true,
+        message: "Account created successfully",
+        data: { token, user },
+      });
   } catch (e) {
     console.error(e);
     res.status(500).json({ success: false, message: "Something went wrong" });

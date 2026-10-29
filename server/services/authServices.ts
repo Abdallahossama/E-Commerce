@@ -14,7 +14,7 @@ export const logIn = async ({ email, password }: LogInInput) => {
     throw error("Email or password is wrong");
   }
 
-  const isPasswordValid = bcrypt.compare(
+  const isPasswordValid = await bcrypt.compare(
     password,
     result.rows[0].password_hash,
   );
@@ -61,5 +61,24 @@ export const signUp = async ({ name, email, password }: SignUpInput) => {
     [name, email, passwordHash],
   );
 
-  return result.rows[0];
+  const user = result.rows[0];
+  const token = jwt.sign(
+    {
+      userId: user.id,
+      email: user.email,
+      role: user.role,
+    },
+    process.env.ACCESS_TOKEN_SECRET as string,
+    { expiresIn: "24h" },
+  );
+
+  return {
+    token,
+    user: {
+      userId: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    },
+  };
 };
